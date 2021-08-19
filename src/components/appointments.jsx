@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Appointment from './appointment';
+import PropTypes from 'prop-types';
 
 const Appointments = props => {
 
@@ -20,6 +21,11 @@ const Appointments = props => {
     }
   </Fragment>
   )
+}
+
+Appointments.propTypes = {
+  appointments: PropTypes.arrayOf(PropTypes.object),
+  deleteAppointment: PropTypes.func.isRequired
 }
 
 export default Appointments;

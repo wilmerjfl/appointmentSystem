@@ -26,6 +26,8 @@ function App() {
 
   // Use Effect for save in local storage
   useEffect(() => {
+    let initialAppointments = JSON.parse(localStorage.getItem('appointments'));
+
     if (initialAppointments) {
       localStorage.setItem('appointments', JSON.stringify(appointments))
     } else {
