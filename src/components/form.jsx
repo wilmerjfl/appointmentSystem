@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
-const Form = () => {
+const Form = (props) => {
 
   const appointmentModel = {
     id: uuidv4(),
@@ -23,8 +23,6 @@ const Form = () => {
 
   const { pet, owner, date, hour, description } = appointment;
 
-  const [error, setError] = useState(false)
-
   const [ errorMessage, setErrormessage] = useState()
 
   const submitAppointment = e => {
@@ -33,17 +31,22 @@ const Form = () => {
     // Validate a ID
     const values = Object.entries(appointment)
     
-    values.forEach((value) => {
-      if(value[1].trim() === '') {
-        setError(true);
-        setErrormessage(value[0]);
-        return;
-      }
-    })
+    // Find empty value
+    const empty = values.find(value => value[1] == '')
 
-    // 
-    
+    if(empty) {
+      // console.log(empty)
+      setErrormessage(empty[0]);
+      return;
+    }
+    // Creating Appointment
+    props.addAppointments(appointment);
 
+    // Reset ErrorMessage
+    setErrormessage()
+
+    // Restart form
+    setAppointment(appointmentModel)  
   }
 
   
@@ -52,7 +55,7 @@ const Form = () => {
     <Fragment>
       <h2>Create Appointment</h2>
 
-      { error ? <p className="alerta-error">All values are required, please add: {errorMessage}</p>: null}
+      { errorMessage ? <p className="alerta-error">All values are required, please add: {errorMessage}</p>: null}
 
       <form
         onSubmit={submitAppointment}

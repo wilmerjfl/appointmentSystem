@@ -1,7 +1,17 @@
-import React, { Fragment } from 'react';
-import Form from './components/form'
+import React, { Fragment, useState } from 'react';
+import Form from './components/form';
+import Appointments from './components/appointments';
 
 function App() {
+
+  const [appointments, setAppointments] = useState([]) 
+
+  const addAppointments = appointment => {
+    setAppointments([
+      ...appointments,
+    appointment])
+  }
+
   return (
     <Fragment>
     <h1> Appointment Administrator</h1>
@@ -9,10 +19,14 @@ function App() {
     <div className="container">
       <div className="row">
         <div className="one-half column">
-        <Form/>
+        <Form 
+          addAppointments={addAppointments}/>
         </div>
         <div className="one-half column">
-            2
+          <Appointments
+            appointments={appointments}
+          />
+
         </div>
       </div>
     </div>
