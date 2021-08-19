@@ -4,10 +4,11 @@ import Appointment from './appointment';
 const Appointments = props => {
 
   const appointments = props.appointments;
-
+  const title = appointments.length === 0 ? `U don't have any appointments` : 'Admin Appointments'
+  
   return (
   <Fragment>
-    <h2>Admin Appointments</h2>
+    <h2>{title}</h2>
     {
       appointments.map(appointment => 
         <Appointment
