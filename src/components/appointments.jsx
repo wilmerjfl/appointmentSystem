@@ -11,9 +11,10 @@ const Appointments = props => {
     {
       appointments.map(appointment => 
         <Appointment
-        key={appointment.id}
-        appointment={appointment}
-      />
+          key={appointment.id}
+          appointment={appointment}
+          deleteAppointment={props.deleteAppointment}
+        />
       )
     }
   </Fragment>

@@ -32,7 +32,7 @@ const Form = (props) => {
     const values = Object.entries(appointment)
     
     // Find empty value
-    const empty = values.find(value => value[1] == '')
+    const empty = values.find(value => value[1] === '')
 
     if(empty) {
       // console.log(empty)
@@ -48,8 +48,6 @@ const Form = (props) => {
     // Restart form
     setAppointment(appointmentModel)  
   }
-
-  
 
   return (
     <Fragment>
