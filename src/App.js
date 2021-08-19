@@ -1,24 +1,37 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Form from './components/form';
 import Appointments from './components/appointments';
 
 function App() {
 
-  const [appointments, setAppointments] = useState([]) 
+  // Check appointments
+  let initialAppointments = JSON.parse(localStorage.getItem('appointments'));
+  if (!initialAppointments) {
+    initialAppointments = [];
+  }
+
+  const [appointments, setAppointments] = useState(initialAppointments);
 
   const addAppointments = appointment => {
     setAppointments([
       ...appointments,
     appointment])
-  }
+  };
 
-  // Delete appointments
   // Delete appointment by id
-
   const deleteAppointment = id => {
     const newAppointments = appointments.filter(appointment => appointment.id !== id)
     setAppointments(newAppointments)
-  }
+  ;}
+
+  // Use Effect for save in local storage
+  useEffect(() => {
+    if (initialAppointments) {
+      localStorage.setItem('appointments', JSON.stringify(appointments))
+    } else {
+      localStorage.setItem('appointments', JSON.stringify([]));
+    }
+  }, [appointments]);
 
   return (
     <Fragment>
@@ -41,6 +54,6 @@ function App() {
     </div>
     </Fragment>
   );
-}
+};
 
 export default App;
